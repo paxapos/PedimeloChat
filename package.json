@@ -1,0 +1,21 @@
+{
+  "name": "pedimelochat",
+  "version": "1.0.0",
+  "description": "Library used to save data into firestore from backend using a couple of functions that simplify that work",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Chat",
+    "pedimelo",
+    "online",
+    "paxapos",
+    "firestore"
+  ],
+  "author": "Nicolas Ariel Peñaloza (git: nicopenaloza)",
+  "license": "ISC",
+  "dependencies": {
+    "firebase-admin": "^10.0.2"
+  }
+}
