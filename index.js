@@ -19,6 +19,10 @@ class app {
         );
     }
 
+    noDataError() {
+        console.error("Checkea personalmente el documento porque no cuenta con datos, probablemente convenga borrarlo y volver a intentarlo");
+    }
+
     async sendMessage(msg) {
         if (!this.readyToRun()) {
             this.noInicializadoError();
@@ -32,13 +36,13 @@ class app {
         if (doc.exists) {
             const data = doc.data();
             if (!data) {
-                console.error(`Checkea personalmente el documento ${msg.firebase_id} porque no cuenta con datos, probablemente convenga borrarlo y volver a intentarlo`);
+                this.noDataError();
                 return false;
             }
 
             await this.db
                 .collection("messages")
-                .doc(msg.firebase_id)
+                .doc(msg.pedido_id)
                 .update({
                     mensajes: [
                         ...data.mensajes,
@@ -46,6 +50,7 @@ class app {
                             event: msg.event,
                             datetime: Timestamp.now(),
                             payload: msg.payload,
+                            origen: msg.origen,
                         },
                     ],
                 });
@@ -53,13 +58,14 @@ class app {
         }
         await this.db
             .collection("messages")
-            .doc(msg.firebase_id)
+            .doc(msg.pedido_id)
             .set({
                 mensajes: [
                     {
                         event: msg.event,
                         datetime: Timestamp.now(),
                         payload: msg.payload,
+                        origen: msg.origen,
                     },
                 ],
             });
@@ -71,8 +77,23 @@ class app {
             this.noInicializadoError();
             return false;
         }
-        const data = await this.db.collection("messages").doc(user_id).get();
-        return data;
+        const user_pedidos = [] // hacer que busque en la base de datos las id de los pedidos del usuario
+        const mensajes = []
+        user_pedidos.forEach(async pedido_id => {
+            const doc = await this.db
+                .collection("messages")
+                .doc(pedido_id)
+                .get();
+            if (doc.exists) {
+                const data = doc.data();
+                if (!data) {
+                    this.noDataError();
+                    return false;
+                }
+                mensajes.push(data.mensajes);
+            }   
+        })
+        return mensajes;
     }
 }
 

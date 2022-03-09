@@ -20,8 +20,5 @@ firebase_id: number,
 }
 */
 
-getMessages(firebase_id) // Gets you a list with the last 10 messages from an specific user ordered last to first
-getMessages(firebase_id, 100) // Gets you a list with the last 100 messages from an specific user ordered last to first
-getMessages(firebase_id, 0) // Gets you a list with all the messages from an specific user ordered last to first
-
+getMessages(firebase_id) // It returns an object with all the messages sended to an user
 ```
