@@ -1,6 +1,6 @@
 {
   "name": "pedimelochat",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Library used to save data into firestore from backend using a couple of functions that simplify that work",
   "main": "index.js",
   "scripts": {
