@@ -21,4 +21,5 @@ firebase_id: number,
 */
 
 getMessages(firebase_id) // It returns an object with all the messages sended to an user
+addUser(user_id, pedido_id) // It adds a new user to the database
 ```
