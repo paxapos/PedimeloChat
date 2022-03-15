@@ -25,13 +25,13 @@ class app {
         );
     }
 
-    async sendMessage(msg) {
+    async sendMessage(msg, origen) {
         if (!this.readyToRun()) {
             this.noInicializadoError();
             return false;
         }
 
-        let ref = this.db.collection("messages").doc(msg.firebase_id);
+        let ref = this.db.collection("messages").doc(msg.payload.id);
         if (!ref) return false;
 
         const doc = await ref.get();
@@ -44,7 +44,7 @@ class app {
 
             await this.db
                 .collection("messages")
-                .doc(msg.pedido_id)
+                .doc(msg.payload.id)
                 .update({
                     mensajes: [
                         ...data.mensajes,
@@ -52,7 +52,7 @@ class app {
                             event: msg.event,
                             datetime: Timestamp.now(),
                             payload: msg.payload,
-                            origen: msg.origen,
+                            origen: origen,
                         },
                     ],
                 });
@@ -60,14 +60,14 @@ class app {
         }
         await this.db
             .collection("messages")
-            .doc(msg.pedido_id)
+            .doc(msg.payload.id)
             .set({
                 mensajes: [
                     {
                         event: msg.event,
                         datetime: Timestamp.now(),
                         payload: msg.payload,
-                        origen: msg.origen,
+                        origen: origen,
                     },
                 ],
             });
