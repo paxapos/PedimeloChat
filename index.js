@@ -6,7 +6,7 @@ class app {
     app;
 
     init(credentials) {
-        (this.app = initializeApp(credentials.app)), (this.db = getFirestore());
+        (this.app = initializeApp(credentials.app)), (this.db = getFirestore(this.app));
     }
 
     readyToRun() {
