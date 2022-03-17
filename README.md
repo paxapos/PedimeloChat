@@ -18,7 +18,7 @@ If you consider that it needs to have an others functions you can add an Issue.
 			export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json"
 
 	```		
-	5. En la pagina de GCP (Google Cloud Plataform [Click Aca]('https://console.cloud.google.com/firestore/data/messages/1212?project=pedimeloonlinetestnico')) de tu proyecto, anda arriba a la izquierda en la barra de busqueda de la pagina, y busca Firestore.
+	5. En la pagina de GCP (Google Cloud Plataform (Click Aca)['https://console.cloud.google.com/firestore/data/messages/1212?project=pedimeloonlinetestnico']) de tu proyecto, anda arriba a la izquierda en la barra de busqueda de la pagina, y busca Firestore.
 	6. Despues activalo.
 
 ### Functions
