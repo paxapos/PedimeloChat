@@ -1,4 +1,4 @@
-const { initializeApp } = require("firebase-admin/app");
+const { initializeApp } = require("firebase/app");
 const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 
 class app {

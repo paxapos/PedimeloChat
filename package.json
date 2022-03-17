@@ -16,6 +16,7 @@
   "author": "Nicolas Ariel Peñaloza (git: nicopenaloza)",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^9.6.8",
     "firebase-admin": "^10.0.2"
   }
 }
