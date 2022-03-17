@@ -1,4 +1,4 @@
-const { initializeApp } = require("firebase/app");
+const { initializeApp, cert } = require("firebase/app");
 const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 
 class app {
@@ -6,7 +6,10 @@ class app {
     app;
 
     init(credentials) {
-        (this.app = initializeApp(credentials.app)), (this.db = getFirestore(this.app));
+        this.app = initializeApp({ 
+                credentials: cert(credentials.app) 
+        })
+        this.db = getFirestore(this.app);
     }
 
     readyToRun() {
@@ -127,24 +130,20 @@ class app {
         const mensajes = [];
 
         user_pedidos.forEach(async (pedido_id) => {
-
             const doc = await this.db
                 .collection("messages")
                 .doc(pedido_id)
                 .get();
             if (doc.exists) {
-
                 const data = doc.data();
                 if (!data) {
                     this.noDataError();
                     return false;
                 }
                 mensajes.push(data.mensajes);
-
             }
-
         });
-        
+
         return mensajes.flat();
     }
 }
