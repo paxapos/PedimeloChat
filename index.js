@@ -1,14 +1,14 @@
-const { initializeApp, cert } = require("firebase-admin/app");
+const { initializeApp, applicationDefault } = require("firebase-admin/app");
 const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 
 class app {
     db;
     app;
 
-    init(credentials) {
-        this.app = initializeApp({ 
-                credentials: cert(credentials.app) 
-        })
+    init() {
+        this.app = initializeApp({
+            credentials: applicationDefault(),
+        });
         this.db = getFirestore(this.app);
     }
 
