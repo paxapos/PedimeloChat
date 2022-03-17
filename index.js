@@ -74,7 +74,7 @@ class app {
         return true;
     }
 
-    addUser(user_id, pedido_id) {
+    async addUser(user_id, pedido_id) {
         if (!this.readyToRun()) {
             this.noInicializadoError();
             return false;
@@ -101,7 +101,7 @@ class app {
         return true;
     }
 
-    getPedidos(user_id) {
+    async getPedidos(user_id) {
         if (!this.readyToRun()) {
             this.noInicializadoError();
             return false;
