@@ -6,10 +6,10 @@ If you consider that it needs to have an others functions you can add an Issue.
 
 ### How to install
 
-	1. En Firebase console, abre Configuración > Cuentas de servicio.
-	2. Haz clic en Generar nueva clave privada y luego en Generar clave para confirmar.
-	3. Almacena de forma segura el archivo JSON que contiene la clave.
-	4. Configura la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS` con la ruta del archivo JSON que contiene la clave de tu cuenta de servicio
+1. En Firebase console, abre Configuración > Cuentas de servicio.
+2. Haz clic en Generar nueva clave privada y luego en Generar clave para confirmar.
+3. Almacena de forma segura el archivo JSON que contiene la clave.
+4. Configura la variable de entorno `GOOGLE_APPLICATION_CREDENTIALS` con la ruta del archivo JSON que contiene la clave de tu cuenta de servicio
 	```
 		Windows: 
 			$env:GOOGLE_APPLICATION_CREDENTIALS="C:\Users\username\Downloads\service-account-file.json"
@@ -18,8 +18,8 @@ If you consider that it needs to have an others functions you can add an Issue.
 			export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/service-account-file.json"
 
 	```		
-	5. En la pagina de GCP (Google Cloud Plataform (Click Aca)['https://console.cloud.google.com/firestore/data/messages/1212?project=pedimeloonlinetestnico']) de tu proyecto, anda arriba a la izquierda en la barra de busqueda de la pagina, y busca Firestore.
-	6. Despues activalo.
+5. En la pagina de GCP (Google Cloud Plataform [Click Aca](https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk)) de tu proyecto, anda arriba a la izquierda en la barra de busqueda de la pagina, y busca Firestore.
+6. Despues activalo.
 
 ### Functions
 
