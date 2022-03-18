@@ -33,8 +33,8 @@ class app {
             this.noInicializadoError();
             return false;
         }
-        const colID = msg.tenant;
-        const docID = msg.firebase_id;
+        const docID = msg.tenant;
+        const colID = msg.firebase_id;
 
         let ref = this.db.collection(colID).doc(docID);
         if (!ref) return false;
@@ -85,7 +85,7 @@ class app {
             return false;
         }
 
-        const doc = await this.db.collection(tenant).doc(user_id).get();
+        const doc = await this.db.collection(user_id).doc(tenant).get();
         if (doc.exists) {
             const data = doc.data();
             if (!data) {
