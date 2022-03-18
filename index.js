@@ -33,8 +33,10 @@ class app {
             this.noInicializadoError();
             return false;
         }
+        const colID = msg.tenant;
+        const docID = msg.firebase_id;
 
-        let ref = this.db.collection("messages").doc(msg.payload.id);
+        let ref = this.db.collection(colID).doc(docID);
         if (!ref) return false;
 
         const doc = await ref.get();
@@ -46,8 +48,8 @@ class app {
             }
 
             await this.db
-                .collection("messages")
-                .doc(msg.payload.id)
+                .collection(colID)
+                .doc(docID)
                 .update({
                     mensajes: [
                         ...data.mensajes,
@@ -62,8 +64,8 @@ class app {
             return true;
         }
         await this.db
-            .collection("messages")
-            .doc(msg.payload.id)
+            .collection(colID)
+            .doc(docID)
             .set({
                 mensajes: [
                     {
@@ -77,74 +79,23 @@ class app {
         return true;
     }
 
-    async addUser(user_id, pedido_id) {
-        if (!this.readyToRun()) {
-            this.noInicializadoError();
-            return false;
-        }
-        const user = await this.db.collection("users").doc(user_id).get();
-
-        if (user.exists) {
-            const userData = user.data();
-            await this.db
-                .collection("users")
-                .doc(user_id)
-                .update({
-                    pedidos: [...userData.pedidos, pedido_id],
-                });
-            return true;
-        }
-
-        await this.db
-            .collection("users")
-            .doc(user_id)
-            .set({
-                pedidos: [pedido_id],
-            });
-        return true;
-    }
-
-    async getPedidos(user_id) {
+    async getMessages(user_id, tenant) {
         if (!this.readyToRun()) {
             this.noInicializadoError();
             return false;
         }
 
-        const user = await this.db.collection("users").doc(user_id).get();
-
-        if (user.exists) {
-            const userData = user.data();
-            return userData.pedidos;
+        const doc = await this.db.collection(tenant).doc(user_id).get();
+        if (doc.exists) {
+            const data = doc.data();
+            if (!data) {
+                this.noDataError();
+                return false;
+            }
+            return data.mensajes;
         }
 
         return false;
-    }
-
-    async getMessages(user_id) {
-        if (!this.readyToRun()) {
-            this.noInicializadoError();
-            return false;
-        }
-
-        const user_pedidos = await this.getPedidos(user_id); // hacer que busque en la base de datos las id de los pedidos del usuario
-        const mensajes = [];
-
-        user_pedidos.forEach(async (pedido_id) => {
-            const doc = await this.db
-                .collection("messages")
-                .doc(pedido_id)
-                .get();
-            if (doc.exists) {
-                const data = doc.data();
-                if (!data) {
-                    this.noDataError();
-                    return false;
-                }
-                mensajes.push(data.mensajes);
-            }
-        });
-
-        return mensajes.flat();
     }
 }
 
