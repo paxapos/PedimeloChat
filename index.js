@@ -4,12 +4,22 @@ const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 class app {
     db;
     app;
+    logger;
 
-    init() {
-        this.app = initializeApp({
-            credentials: applicationDefault(),
-        });
-        this.db = getFirestore(this.app);
+    init(logger) {
+        
+        if (logger) this.logger = logger;
+
+        try {
+            this.app = initializeApp({
+                credentials: applicationDefault(),
+            });
+            this.db = getFirestore(this.app);
+        }
+        catch (e){
+            console.error("No se pudo inicializar el servicio de Firebase", e);
+            if (this.logger) this.logger.error(`No se pudo inicializar el servicio de Firebase ${e}`);
+        }
     }
 
     readyToRun() {
@@ -20,12 +30,14 @@ class app {
         console.error(
             "PedimeloChat no fue inicializado todavia, por favor inicializalo primero"
         );
+        if (this.logger) this.logger.error(`PedimeloChat no fue inicializado todavia, por favor inicializalo primero`);
     }
 
     noDataError() {
         console.error(
             "Checkea personalmente el documento porque no cuenta con datos, probablemente convenga borrarlo y volver a intentarlo"
         );
+        if (this.logger) this.logger.error(`Checkea personalmente el documento porque no cuenta con datos, probablemente convenga borrarlo y volver a intentarlo`);
     }
 
     async sendMessage(msg, origen) {
