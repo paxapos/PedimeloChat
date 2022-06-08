@@ -1,4 +1,4 @@
-# pedimeloChat
+# pedimeloChat API
  
 This is a library that includes a couple of functions that simplify the work with firestore. Its designed to implement with Pedimelo Online, an other product of [@Paxapos](https://github.com/paxapos).
 
